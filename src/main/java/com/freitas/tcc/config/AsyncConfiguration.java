@@ -1,4 +1,4 @@
-package br.com.serasaconsumidor.serasabox.user.config;
+package com.freitas.tcc.config;
 
 import io.github.jhipster.async.ExceptionHandlingAsyncTaskExecutor;
 import org.slf4j.Logger;

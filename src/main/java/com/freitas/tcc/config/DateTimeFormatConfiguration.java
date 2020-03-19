@@ -1,4 +1,4 @@
-package br.com.serasaconsumidor.serasabox.user.config;
+package com.freitas.tcc.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
