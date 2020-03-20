@@ -1,4 +1,4 @@
-package com.freitas.tcc.web.rest.resources;
+package com.freitas.tcc.rest.resources;
 
 import com.freitas.tcc.entity.Address;
 import org.springframework.web.bind.annotation.GetMapping;

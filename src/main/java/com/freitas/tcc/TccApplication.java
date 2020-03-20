@@ -3,7 +3,7 @@ package com.freitas.tcc;
 import com.freitas.tcc.config.ApplicationProperties;
 import com.freitas.tcc.config.DefaultProfileUtil;
 import io.github.jhipster.config.JHipsterConstants;
-import org.apache.commons.lang3.StringUtils;
+import net.logstash.logback.encoder.org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
