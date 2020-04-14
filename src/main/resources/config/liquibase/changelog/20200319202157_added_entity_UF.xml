@@ -6,21 +6,28 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-
-    <!--
-        Added the entity BusinessUnit.
-    -->
-    <changeSet id="20200319202157-1" author="jhipster">
+    <changeSet id="20200319202157-1" author="paulorfreitasjr">
         <createTable tableName="uf">
-            <column name="id" type="int" autoIncrement="${autoIncrement}">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(120)">
-                <constraints nullable="true" />
+            <column name="federative_unit" type="char(2)">
+                <constraints nullable="false" />
             </column>
-
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+            <column name="description" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
         </createTable>
+    </changeSet>
 
+    <changeSet id="20200319202157-2" author="jhipster">
+        <loadData
+                file="config/liquibase/data/uf.csv"
+                separator=","
+                tableName="uf">
+            <column name="id" type="numeric"/>
+            <column name="federative_unit" type="string"/>
+            <column name="description" type="string"/>
+        </loadData>
     </changeSet>
 </databaseChangeLog>

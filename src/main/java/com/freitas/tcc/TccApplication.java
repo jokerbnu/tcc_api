@@ -1,26 +1,23 @@
 package com.freitas.tcc;
 
 import com.freitas.tcc.config.ApplicationProperties;
-import com.freitas.tcc.config.DefaultProfileUtil;
-import io.github.jhipster.config.JHipsterConstants;
-import net.logstash.logback.encoder.org.apache.commons.lang3.StringUtils;
+import io.micrometer.core.instrument.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Collection;
 
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
-public class TccApplication implements InitializingBean {
+@EnableJpaRepositories("com.freitas.tcc.repository")
+public class TccApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(TccApplication.class);
 
@@ -30,34 +27,8 @@ public class TccApplication implements InitializingBean {
 		this.env = env;
 	}
 
-	/**
-	 * Initializes ecsserasaboxuser.
-	 * <p>
-	 * Spring profiles can be configured with a program argument --spring.profiles.active=your-active-profile
-	 * <p>
-	 * You can find more information on how profiles work with JHipster on <a href="https://www.jhipster.tech/profiles/">https://www.jhipster.tech/profiles/</a>.
-	 */
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		Collection<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
-		if (activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_PRODUCTION)) {
-			log.error("You have misconfigured your application! It should not run " +
-					"with both the 'dev' and 'prod' profiles at the same time.");
-		}
-		if (activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_CLOUD)) {
-			log.error("You have misconfigured your application! It should not " +
-					"run with both the 'dev' and 'cloud' profiles at the same time.");
-		}
-	}
-
-	/**
-	 * Main method, used to run the application.
-	 *
-	 * @param args the command line arguments.
-	 */
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(TccApplication.class);
-		DefaultProfileUtil.addDefaultProfile(app);
+		var app = new SpringApplication(TccApplication.class);
 		Environment env = app.run(args).getEnvironment();
 		logApplicationStartup(env);
 	}
@@ -93,5 +64,4 @@ public class TccApplication implements InitializingBean {
 				contextPath,
 				env.getActiveProfiles());
 	}
-
 }

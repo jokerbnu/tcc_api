@@ -1,22 +1,25 @@
 package com.freitas.tcc.entity;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "uf")
-public class UF implements Serializable {
+@Data
+public class UF {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private UUID id;
+    private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "federative_unit")
+    private String federativeUnit;
+
+    @Column
+    private String description;
 }

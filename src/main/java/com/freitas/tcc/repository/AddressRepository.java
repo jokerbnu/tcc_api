@@ -1,9 +1,11 @@
 package com.freitas.tcc.repository;
 
-import com.freitas.tcc.entity.UF;
+import com.freitas.tcc.entity.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public interface UFRepository extends JpaRepository<UF, Integer> {
+public interface AddressRepository extends JpaRepository<Address, UUID> {
 }
