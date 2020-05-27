@@ -1,7 +1,7 @@
 package com.freitas.tcc.rest.resource;
 
-import com.freitas.tcc.entity.Address;
-import com.freitas.tcc.service.AddressService;
+import com.freitas.tcc.entity.Beacon;
+import com.freitas.tcc.service.BeaconService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,47 +18,47 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/address")
-public class AddressResource {
+@RequestMapping("/v1/beacon")
+public class BeaconResource {
     @Autowired
-    private AddressService addressService;
+    private BeaconService beaconService;
 
     @GetMapping
-    public ResponseEntity<List<Address>> get() {
-        return ResponseEntity.ok(addressService.getAll());
+    public ResponseEntity<List<Beacon>> get() {
+        return ResponseEntity.ok(beaconService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Address> get(@PathVariable UUID id) {
-        var address = addressService.get(id);
+    public ResponseEntity<Beacon> get(@PathVariable UUID id) {
+        var beacon = beaconService.get(id);
 
-        if(address.isPresent())
-            return ResponseEntity.ok(address.get());
+        if(beacon.isPresent())
+            return ResponseEntity.ok(beacon.get());
 
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<Address> create(@Valid @RequestBody Address address) {
-        return ResponseEntity.ok(addressService.insert(address));
+    public ResponseEntity<Beacon> create(@Valid @RequestBody Beacon beacon) {
+        return ResponseEntity.ok(beaconService.insert(beacon));
     }
 
     @PutMapping
-    public ResponseEntity<Address> update(@Valid @RequestBody Address address) {
-        if(address.getId() == null || !addressService.get(address.getId()).isPresent())
+    public ResponseEntity<Beacon> update(@Valid @RequestBody Beacon beacon) {
+        if(beacon.getId() == null || !beaconService.get(beacon.getId()).isPresent())
             return ResponseEntity.notFound().build();
 
-        addressService.update(address);
+        beaconService.update(beacon);
 
-        return ResponseEntity.ok(address);
+        return ResponseEntity.ok(beacon);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
-        var address = addressService.get(id);
+        var beacon = beaconService.get(id);
 
-        if(address.isPresent()) {
-            addressService.delete(id);
+        if(beacon.isPresent()) {
+            beaconService.delete(id);
 
             return ResponseEntity.noContent().build();
         }

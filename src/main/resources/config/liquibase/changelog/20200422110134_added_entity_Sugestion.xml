@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20200422100552-1" author="paulorfreitasjr">
+        <createTable tableName="sugestion">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="status" type="tinyint">
+                <constraints nullable="false" />
+            </column>
+            <column name="address_id" type="uuid">
+                <constraints nullable="false" uniqueConstraintName="ux_sugestion_address_id" />
+            </column>
+            <column name="user_id" type="uuid">
+                <constraints nullable="true" uniqueConstraintName="ux_sugestion_user_id" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20200422100552-2" author="paulorfreitasjr">
+        <addForeignKeyConstraint baseColumnNames="address_id"
+                                 baseTableName="sugestion"
+                                 constraintName="fk_sugestion_address_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="address"/>
+    </changeSet>
+
+    <changeSet id="20200422100552-3" author="paulorfreitasjr">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="sugestion"
+                                 constraintName="fk_sugestion_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tcc_user"/>
+    </changeSet>
+
+</databaseChangeLog>

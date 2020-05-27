@@ -1,7 +1,7 @@
 package com.freitas.tcc.rest.resource;
 
-import com.freitas.tcc.entity.Address;
-import com.freitas.tcc.service.AddressService;
+import com.freitas.tcc.entity.Sugestion;
+import com.freitas.tcc.service.SugestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,47 +18,47 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/address")
-public class AddressResource {
+@RequestMapping("/v1/sugestion")
+public class SugestionResource {
     @Autowired
-    private AddressService addressService;
+    private SugestionService sugestionService;
 
     @GetMapping
-    public ResponseEntity<List<Address>> get() {
-        return ResponseEntity.ok(addressService.getAll());
+    public ResponseEntity<List<Sugestion>> get() {
+        return ResponseEntity.ok(sugestionService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Address> get(@PathVariable UUID id) {
-        var address = addressService.get(id);
+    public ResponseEntity<Sugestion> get(@PathVariable UUID id) {
+        var sugestion = sugestionService.get(id);
 
-        if(address.isPresent())
-            return ResponseEntity.ok(address.get());
+        if (sugestion.isPresent())
+            return ResponseEntity.ok(sugestion.get());
 
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<Address> create(@Valid @RequestBody Address address) {
-        return ResponseEntity.ok(addressService.insert(address));
+    public ResponseEntity<Sugestion> create(@Valid @RequestBody Sugestion sugestion) {
+        return ResponseEntity.ok(sugestionService.insert(sugestion));
     }
 
     @PutMapping
-    public ResponseEntity<Address> update(@Valid @RequestBody Address address) {
-        if(address.getId() == null || !addressService.get(address.getId()).isPresent())
+    public ResponseEntity<Sugestion> update(@Valid @RequestBody Sugestion sugestion) {
+        if(sugestion.getId() == null || !sugestionService.get(sugestion.getId()).isPresent())
             return ResponseEntity.notFound().build();
 
-        addressService.update(address);
+        sugestionService.update(sugestion);
 
-        return ResponseEntity.ok(address);
+        return ResponseEntity.ok(sugestion);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
-        var address = addressService.get(id);
+        var sugestion = sugestionService.get(id);
 
-        if(address.isPresent()) {
-            addressService.delete(id);
+        if(sugestion.isPresent()) {
+            sugestionService.delete(id);
 
             return ResponseEntity.noContent().build();
         }

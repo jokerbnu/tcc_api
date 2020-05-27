@@ -1,7 +1,7 @@
 package com.freitas.tcc.rest.resource;
 
-import com.freitas.tcc.entity.Address;
-import com.freitas.tcc.service.AddressService;
+import com.freitas.tcc.entity.User;
+import com.freitas.tcc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,47 +18,47 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/v1/address")
-public class AddressResource {
+@RequestMapping("/v1/user")
+public class UserResource {
     @Autowired
-    private AddressService addressService;
+    private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<Address>> get() {
-        return ResponseEntity.ok(addressService.getAll());
+    public ResponseEntity<List<User>> get() {
+        return ResponseEntity.ok(userService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Address> get(@PathVariable UUID id) {
-        var address = addressService.get(id);
+    public ResponseEntity<User> get(@PathVariable UUID id) {
+        var user = userService.get(id);
 
-        if(address.isPresent())
-            return ResponseEntity.ok(address.get());
+        if(user.isPresent())
+            return ResponseEntity.ok(user.get());
 
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<Address> create(@Valid @RequestBody Address address) {
-        return ResponseEntity.ok(addressService.insert(address));
+    public ResponseEntity<User> create(@Valid @RequestBody User user) {
+        return ResponseEntity.ok(userService.insert(user));
     }
 
     @PutMapping
-    public ResponseEntity<Address> update(@Valid @RequestBody Address address) {
-        if(address.getId() == null || !addressService.get(address.getId()).isPresent())
+    public ResponseEntity<User> update(@Valid @RequestBody User user) {
+        if(user.getId() == null || !userService.get(user.getId()).isPresent())
             return ResponseEntity.notFound().build();
 
-        addressService.update(address);
+        userService.update(user);
 
-        return ResponseEntity.ok(address);
+        return ResponseEntity.ok(user);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
-        var address = addressService.get(id);
+        var user = userService.get(id);
 
-        if(address.isPresent()) {
-            addressService.delete(id);
+        if(user.isPresent()) {
+            userService.delete(id);
 
             return ResponseEntity.noContent().build();
         }

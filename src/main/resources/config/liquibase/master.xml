@@ -6,4 +6,7 @@
 
     <include file="config/liquibase/changelog/20200319202157_added_entity_UF.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200413202338_added_entity_Address.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200422100552_added_entity_User.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200422110134_added_entity_Sugestion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200422120134_added_entity_Beacon.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

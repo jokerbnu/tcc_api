@@ -6,40 +6,32 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="20200413202338-1" author="paulorfreitasjr">
-        <createTable tableName="address">
+    <changeSet id="20200422120134-1" author="paulorfreitasjr">
+        <createTable tableName="beacon">
             <column name="id" type="uuid">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="city" type="varchar(60)">
+            <column name="identity" type="varchar(50)">
                 <constraints nullable="false" />
             </column>
-            <column name="neighborhood" type="varchar(40)">
+            <column name="message" type="varchar(120)">
                 <constraints nullable="false" />
             </column>
-            <column name="street" type="varchar(80)">
+            <column name="range" type="tinyint">
                 <constraints nullable="false" />
             </column>
-            <column name="complement" type="varchar(120)">
-                <constraints nullable="true" />
-            </column>
-            <column name="number" type="int">
-                <constraints nullable="true" />
-            </column>
-            <column name="uf_id" type="int">
-                <constraints nullable="false" uniqueConstraintName="ux_address_uf_id" />
+            <column name="address_id" type="uuid">
+                <constraints nullable="false" uniqueConstraintName="ux_beacon_address_id" />
             </column>
         </createTable>
     </changeSet>
 
-    <changeSet id="20200413202338-2" author="paulorfreitasjr">
-
-        <addForeignKeyConstraint baseColumnNames="uf_id"
-                                 baseTableName="address"
-                                 constraintName="fk_address_uf_id"
+    <changeSet id="20200422120134-2" author="paulorfreitasjr">
+        <addForeignKeyConstraint baseColumnNames="address_id"
+                                 baseTableName="beacon"
+                                 constraintName="fk_beacon_address_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="uf"/>
-
+                                 referencedTableName="address"/>
     </changeSet>
 
 </databaseChangeLog>
