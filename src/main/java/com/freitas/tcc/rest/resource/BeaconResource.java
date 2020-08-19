@@ -28,9 +28,9 @@ public class BeaconResource {
         return ResponseEntity.ok(beaconService.getAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Beacon> get(@PathVariable UUID id) {
-        var beacon = beaconService.get(id);
+    @GetMapping("/{identity}")
+    public ResponseEntity<Beacon> get(@PathVariable String identity) {
+        var beacon = beaconService.get(identity);
 
         if(beacon.isPresent())
             return ResponseEntity.ok(beacon.get());

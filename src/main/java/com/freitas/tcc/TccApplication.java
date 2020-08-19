@@ -16,7 +16,6 @@ import java.net.UnknownHostException;
 
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
-@EnableJpaRepositories("com.freitas.tcc.repository")
 public class TccApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(TccApplication.class);

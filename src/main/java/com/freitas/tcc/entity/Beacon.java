@@ -12,20 +12,24 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "beacon")
-public class Beacon {
+public class Beacon implements Serializable {
     @Id
     @GeneratedValue(generator = "hibernate-uuid")
     @GenericGenerator(name = "id", strategy = "uuid2")
     private UUID id;
 
-    @Column
-    private String identify;
+    @NotNull
+    @Column(name = "identity")
+    private String identity;
 
+    @NotNull
     @Length(max = 120)
     @Column
     private String message;
@@ -33,7 +37,7 @@ public class Beacon {
     @Min(1)
     @Max(3)
     @Column
-    private Integer range;
+    private Integer range = 3;
 
     @ManyToOne
     private Address address;

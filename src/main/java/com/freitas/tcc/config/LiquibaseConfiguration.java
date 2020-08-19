@@ -27,7 +27,6 @@ public class LiquibaseConfiguration {
     public SpringLiquibase liquibase(@Qualifier("taskExecutor") Executor executor,
             DataSource dataSource, LiquibaseProperties liquibaseProperties) {
 
-        // Use liquibase.integration.spring.SpringLiquibase if you don't want Liquibase to start asynchronously
         var liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource);
         liquibase.setChangeLog("classpath:config/liquibase/master.xml");

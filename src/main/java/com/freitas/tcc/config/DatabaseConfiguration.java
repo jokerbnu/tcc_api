@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @Configuration
-@EnableJpaRepositories("br.com.serasaconsumidor.serasabox.user.repository")
+@EnableJpaRepositories("com.freitas.tcc.repository")
 @EnableTransactionManagement
 public class DatabaseConfiguration {
 

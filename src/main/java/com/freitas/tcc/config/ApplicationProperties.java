@@ -6,8 +6,6 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Properties specific to Ecsserasaboxuser.
- * <p>
  * Properties are configured in the {@code application.yml} file.
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)

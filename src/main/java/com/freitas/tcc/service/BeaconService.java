@@ -29,6 +29,10 @@ public class BeaconService {
         return beaconRepository.findById(id);
     }
 
+    public Optional<Beacon> get(String identity) {
+        return beaconRepository.findOneByIdentity(identity);
+    }
+
     public Beacon insert(Beacon beacon) {
         if (beacon.getAddress() != null && beacon.getAddress().getId() == null) {
             var newAddress = addressService.insert(beacon.getAddress());

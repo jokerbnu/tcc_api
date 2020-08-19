@@ -13,10 +13,10 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-#logging:
-#  level:
-#    ROOT: DEBUG
-#    com.freitas: DEBUG
+logging:
+  level:
+    ROOT: INFO
+    com.freitas: INFO
 
 spring:
   application:
@@ -35,7 +35,7 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/sb_tcc
+    url: jdbc:postgresql://localhost:5432/tcc
     username: postgres
     password: postgres
     hikari:
